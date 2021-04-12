@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+#birLogo{
+    width: 50px;
+    height: 50px;
+}
+
+#barCode{
+    height: 40px;
+    
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-blue {
+    background-color: blueviolet;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.line-height-80{
+    line-height: 80%;
+}
+.line-height-50{
+    line-height: 50%;
+}
+
+.line-height-120{
+    line-height: 120%;
+}
+.bg-lgrey
+{
+    background-color: #d9d9d9;
+}
+
+.bg-dgrey {
+    background-color: #999999;
+}
+
+
+.no-lr-border {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    
+}
+
+.full-border{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right:  1px solid black;
+    border-left: 1px solid black;
+}
+.no-l-border {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right:  1px solid black;
+}
+.half-border-r {
+    position: relative;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    
+  }
+  
+  .half-border-r:after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    height: 50%;
+    border-left: 1px solid black;
+    
+  }
+  .half-border-r-only {
+    position: relative;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    
+  }
+  
+  .half-border-r-only:after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    height: 50%;
+    border-right: 1px solid black;
+    
+  }
+
+  .let-sp-min {
+    letter-spacing: -1px;
+  }
+
+  .text-small-sp-min{
+      font-size: 0.85em;
+      letter-spacing: -1px;
+  }
+
+  .no-v-pad-mar {
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+  }
+
+  body{
+      width: 100%;
+  }
