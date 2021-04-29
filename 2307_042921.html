@@ -30,18 +30,18 @@
             </div>
             <div class="col-6">
                 <div class="row">
-                    
+
                     <div class="col-auto text-center " >
                         <img src="https://logodix.com/logo/1578333.png" alt="" id="birLogo" style="max-width:100%;height:auto;">
-                    </div> 
+                    </div>
                     <div class="col-auto text-center ">
                         <p class="my-0 py-0 line-height-120"><strong>Republic of the Philippines</strong> </p>
                         <p class="my-0 py-0 line-height-120">Department of Finance</p>
                         <p class="my-0 py-0 line-height-120">Bureau of Internal Revenue</p>
                     </div>
-                    
-                </div>        
-        
+
+                </div>
+
             </div>
             <div class="col-2">
 
@@ -56,23 +56,23 @@
                 <p class="m-0 line-height-80">January 2018 (ENCS)</p>
             </div>
             <div class="col-6 text-center border border-secondary pt-1">
-                <h2 class="line-height-80">Certificate of Creditable Tax</h2> 
+                <h2 class="line-height-80">Certificate of Creditable Tax</h2>
                 <h2 class="line-height-80">Witheld at Source</h2></div>
             <div class="col-3 border border-secondary py-0">
                 <div class="d-flex align-items-center flex-column">
-                <img src='https://drscdn.500px.org/photo/1030853731/m%3D900/v2?sig=beb1a9e20856fd457efcf65027bd0732526758e52fd8f34212195f088783fc8f' alt='2307_barCode' style="max-width:100%;height:auto;" id="barCode" />            
+                <img src='https://drscdn.500px.org/photo/1030853731/m%3D900/v2?sig=beb1a9e20856fd457efcf65027bd0732526758e52fd8f34212195f088783fc8f' alt='2307_barCode' style="max-width:100%;height:auto;" id="barCode" />
                 </div>
                 <div class="d-flex align-items-end flex-column">
                 <p class="line-height-80 p-0 m-0"><small>2307 01/18ENCS</small></p>
                 </div>
             </div>
         </div>
-       
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary px-2 py-1">
             Fill in all applicable spaces. Mark all appropriate boxes with an "X".
         </div>
-        
+
         <!--NEW ROW-->
         <div id="periodCoverage" class="row border border-1 border-top-0 border-secondary bg-lgrey py-1">
             <div class="col-auto">
@@ -81,28 +81,104 @@
             <div class="col-auto">
                 For the Period
             </div>
-            <div class="col-auto">
-                <span class="px-2"> From </span>
-                <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                <span class="half-border-r bg-white px-1"> X </span><span class="half-border-r-only bg-white px-1"> X </span><span class="half-border-r-only bg-white px-1"> X </span><span class="no-l-border bg-white px-1"> X </span>    
-                <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
-            </div>
-            <div class="col-auto">
-                <span class="px-2">To</span>
-                <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                <span class="half-border-r bg-white px-1"> X </span><span class="half-border-r-only bg-white px-1"> X </span><span class="half-border-r-only bg-white px-1"> X </span><span class="no-l-border bg-white px-1"> X </span>    
-                <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
-            </div>
+        <!-- Getting the Year -->
+        {% set post_year = frappe.utils.get_datetime(doc.posting_date).strftime('%Y') %}
+        <!-- Getting the Month -->
+        {% set post_month = frappe.utils.get_datetime(doc.posting_date).strftime('%-m') %}
+
+
+         <!--1st Quarter -->
+            {% if post_month == '1' or post_month == '2' or post_month == '3'  %}
+            {% set put_baseNet1 = "{:,.2f}".format(doc.base_net_total) %}
+            {% set put_baseNet2 = '-' %}
+            {% set put_baseNet3 = '-' %}
+
+                    <div class="col-auto">
+                        <span class="px-2"> From </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ Q1_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="px-2">To</span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 3 </span>
+                        <span class="half-border-r bg-white px-1"> 3 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ Q1_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+
+         <!--2nd Quarter -->
+            {% elif post_month == '4' or post_month == '5' or post_month == '6' %}
+            {% set put_baseNet2 = "{:,.2f}".format(doc.base_net_total) %}
+            {% set put_baseNet1 = '-' %}
+            {% set put_baseNet3 = '-' %}
+                    <div class="col-auto">
+                        <span class="px-2"> From </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 4 </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ post_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="px-2">To</span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 6 </span>
+                        <span class="half-border-r bg-white px-1"> 3 </span><span class="no-lr-border bg-white px-1"> 0 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ post_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+
+         <!--3rd Quarter -->
+            {% elif post_month == '7' or post_month == '8' or post_month == '9' %}
+            {% set put_baseNet3 = "{:,.2f}".format(doc.base_net_total) %}
+            {% set put_baseNet1 = '-' %}
+            {% set put_baseNet2 = '-' %}
+
+                    <div class="col-auto">
+                        <span class="px-2"> From </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 7 </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ post_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="px-2">To</span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 9 </span>
+                        <span class="half-border-r bg-white px-1"> 3 </span><span class="no-lr-border bg-white px-1"> 0 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ post_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+
+         <!--4th Quarter -->
+            {% else %}
+            {% set put_baseNet2 = '-' %}
+            {% set put_baseNet3 = '-' %}
+            {% set put_baseNet1 = '-' %}
+                    <div class="col-auto">
+                        <span class="px-2"> From </span>
+                        <span class="half-border-r bg-white px-1"> 1 </span><span class="no-lr-border bg-white px-1"> 0 </span>
+                        <span class="half-border-r bg-white px-1"> 0 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ post_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="px-2">To</span>
+                        <span class="half-border-r bg-white px-1"> 1 </span><span class="no-lr-border bg-white px-1"> 2 </span>
+                        <span class="half-border-r bg-white px-1"> 3 </span><span class="no-lr-border bg-white px-1"> 1 </span>
+                        <span class="half-border-r bg-white px-1"> {{ post_year[0:1] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[1:2] }} </span><span class="half-border-r-only bg-white px-1"> {{ post_year[2:3] }} </span><span class="no-l-border bg-white px-1"> {{ post_year[3:4] }} </span>
+                        <span class="px-1"><i> <small>(MM/DD/YYYY)</small></i></span>
+                    </div>
+
+            {% endif %}
+
 
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey text-center py-1">
             <strong>Part I: Payee Information</strong>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey py-1" id="taxID">
             <div class="col-auto">
@@ -111,24 +187,27 @@
             <div class="col-auto">
                 Taxpayer Identification Number (TIN)
             </div>
-            <!-- <div class="col-auto">
-                <span class="half-border-r bg-white px-1"> X </span>
-                <span class="half-border-r-only bg-white px-1"> X </span>
-                <span class="no-l-border bg-white px-1"> X </span>
-                <span class="no-lr-border bg-dgrey px-1">-</span><span class="half-border-r bg-white px-1"> X </span>
-                <span class="half-border-r-only bg-white px-1"> X </span>
-                <span class="no-l-border bg-white px-1"> X </span>
-                <span class="no-lr-border bg-dgrey px-1">-</span><span class="half-border-r bg-white px-1"> X </span>
-                <span class="half-border-r-only bg-white px-1"> X </span>
-                <span class="half-border-r-only bg-white px-1"> X </span>
-                <span class="half-border-r-only bg-white px-1"> X </span>
-                <span class="no-l-border bg-white px-1"> X </span>
-            </div> -->
-            <div class="col-auto full-border bg-white">
-                {{doc.tax_id}}
+            <!-- Split TIN -->
+            {% set tinN = doc.tax_id.split('-') %}
+            <div class="col-auto">
+                <span class="half-border-r bg-white px-1"> {{ tinN[0][0:1] }} </span>
+                <span class="half-border-r-only bg-white px-1"> {{ tinN[0][1:2] }} </span>
+                <span class="no-l-border bg-white px-1"> {{ tinN[0][2:3] }} </span>
+                <span class="no-lr-border bg-dgrey px-1">-</span><span class="half-border-r bg-white px-1"> {{ tinN[1][0:1] }} </span>
+                <span class="half-border-r-only bg-white px-1"> {{ tinN[1][1:2] }} </span>
+                <span class="no-l-border bg-white px-1"> {{ tinN[1][2:3] }} </span>
+                <span class="no-lr-border bg-dgrey px-1">-</span><span class="half-border-r bg-white px-1"> {{ tinN[2][0:1] }} </span>
+                <span class="half-border-r-only bg-white px-1"> {{ tinN[2][1:2] }} </span>
+                <span class="no-l-border bg-white px-1"> {{ tinN[2][2:3] }} </span>
+                <span class="no-lr-border bg-dgrey px-1">-</span><span class="half-border-r bg-white px-1"> {{ tinN[3][0:1] }} </span>
+                <span class="half-border-r-only bg-white px-1"> {{ tinN[3][1:2] }} </span>
+                <span class="no-l-border bg-white px-1"> {{ tinN[3][2:3] }} </span>
             </div>
+           <!-- <div class="col-auto full-border bg-white">
+                {{doc.tax_id}}
+            </div> -->
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-bottom-0 border-secondary bg-lgrey" id="payeesName">
             <div class="col-auto">
@@ -136,7 +215,7 @@
             </div>
             <div class="col-11">
                 <div >
-                        Payee's Name 
+                        Payee's Name
                         <small>
                             <i>(Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)</i>
                         </small>
@@ -144,7 +223,7 @@
                 <div class="border border-1 bg-white mb-1 px-2 border-secondary">{{ doc.supplier_name }}</div>
             </div>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-bottom-0 border-secondary bg-lgrey" id="regAddress">
             <div class="col-auto">
@@ -157,7 +236,7 @@
                 <div class="border border-1 bg-white mb-1 px-2 border-secondary">{{ doc.supplier_address }}</div>
             </div>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey" id="foreignAddress">
             <div class="col-auto">
@@ -170,12 +249,12 @@
                 <div class="border border-1 bg-white mb-1 px-2 border-secondary">&nbsp;</div>
             </div>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey text-center py-1">
             <strong>Part II: Payor Information</strong>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey py-1" id="taxID_payor">
             <div class="col-auto">
@@ -198,7 +277,7 @@
                 <span class="no-l-border bg-white px-1"> X </span>
             </div>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-bottom-0 border-secondary bg-lgrey" id="payorName">
             <div class="col-auto">
@@ -206,7 +285,7 @@
             </div>
             <div class="col-11">
                 <div >
-                    Payor's Name 
+                    Payor's Name
                     <small>
                         <i>(Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)</i>
                     </small>
@@ -214,7 +293,7 @@
                 <div class="border border-1 bg-white mb-1 px-2 border-secondary">{{ doc.company }}</div>
             </div>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey" id="regAddress_payor">
             <div class="col-auto">
@@ -227,12 +306,12 @@
                 <div class="border border-1 bg-white mb-1 px-2 border-secondary"> &nbsp; </div>
             </div>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey text-center py-1">
             <strong>Part III: Details of Monthly Income Payments and Taxes Witheld</strong>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey text-center">
             <div class="col-3 border-end border-1 border-secondary pt-2 smallTitle">Income Payments Subject to Expanded Witholding Tax</div>
@@ -251,7 +330,7 @@
             </div>
             <div class="col-3 px-0 mx-0">
                 <small><b> Tax Witheld for the Quarter</b></small>
-            </div> 
+            </div>
         </div>
 
         <!--NEW ROW--><!--1st Empty Row INCOME PAYMENTS-->
@@ -260,15 +339,16 @@
             <div class="col-1 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
             <div class="col-5">
                 <div class="row">
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ put_baseNet1 }}</div>
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ put_baseNet2 }}</div>
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ put_baseNet3 }}</div>
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ "{:,.2f}".format(doc.base_net_total) }}</div>
+                </div>
             </div>
-            <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
+            {% set tax_withheld = doc.base_net_total*0.02 %}
+            <div class="col-3 emptyRow_cell border-1 border-secondary">{{ "{:,.2f}".format(tax_withheld) }}</div>
         </div>
-        
+
         <!--NEW ROW--><!--2nd Empty Row INCOME PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -279,11 +359,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--3rd Empty Row INCOME PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -294,26 +374,26 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--4th Empty Row INCOME PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
-            <div class="col-1 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>    
+            <div class="col-1 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
             <div class="col-5">
                 <div class="row">
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--5th Empty Row INCOME PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -324,11 +404,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--6th Empty Row INCOME PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -339,11 +419,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--7th Empty Row INCOME PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -354,11 +434,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--8th Empty Row INCOME PAYMENTS-->
         <!-- <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -369,7 +449,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
@@ -384,7 +464,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
@@ -399,7 +479,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
@@ -410,15 +490,15 @@
             <div class="col-1 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
             <div class="col-5">
                 <div class="row">
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
-                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
-                </div>        
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ put_baseNet1 }}</div>
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ put_baseNet2 }}</div>
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ put_baseNet3 }}</div>
+                    <div class="col-3 emptyRow_cell border-end border-1 border-secondary">{{ "{:,.2f}".format(doc.base_net_total) }}</div>
+                </div>
             </div>
-            <div class="col-3 emptyRow_cell border-1 border-secondary"> </div>
+            <div class="col-3 emptyRow_cell border-1 border-secondary">{{ "{:,.2f}".format(tax_withheld) }}</div>
         </div>
-        
+
         <!--NEW ROW--><!--MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0 text-center  bg-lgrey">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary smallTitle">Money Payments Subject to Withholding of Business Tax (Government & Private)</div>
@@ -426,7 +506,7 @@
             <div class="col-5 border-end border-1 border-secondary"></div>
             <div class="col-3 emptyRow_cell border-1 border-secondary"> </div>
         </div>
-        
+
         <!--NEW ROW--><!--1st Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -437,11 +517,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--2nd Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -452,11 +532,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--3rd Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -467,11 +547,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--4th Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -482,11 +562,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--5th Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -497,11 +577,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--6th Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -512,11 +592,11 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
-        
+
         <!--NEW ROW--><!--7th Empty Row MONEY PAYMENTS-->
         <div class="row emptyRow border border-1 border-secondary border-top-0">
             <div class="col-3 emptyRow_cell border-end border-1 border-secondary">&nbsp;</div>
@@ -527,7 +607,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
@@ -542,7 +622,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div>
@@ -557,7 +637,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div> -->
@@ -572,7 +652,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">-</div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary">-</div>
         </div> -->
@@ -587,7 +667,7 @@
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
                     <div class="col-3 emptyRow_cell border-end border-1 border-secondary">- </div>
-                </div>        
+                </div>
             </div>
             <div class="col-3 emptyRow_cell border-1 border-secondary"> </div>
         </div>
@@ -607,12 +687,12 @@
             <p class="py-0 my-0 line-height-80"><small>Signature over Printed Name of Payor/Payor’s Authorized Representative/Tax Agent</small></p>
             <p class="py-0 my-0"><small><i>(Indicate Title/Designation and TIN)</i></small></p>
         </div>
-        
+
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey">
             <div class="col-2">
-                <p class=" py-0 my-0 text-small-sp-min">Tax-Agent Accreditation No./ </p> 
-                <p class=" py-0 my-0 text-small-sp-min">Attorney's Roll No. (if applicable)</p>    
+                <p class=" py-0 my-0 text-small-sp-min">Tax-Agent Accreditation No./ </p>
+                <p class=" py-0 my-0 text-small-sp-min">Attorney's Roll No. (if applicable)</p>
             </div>
             <div class="col-2 full-border bg-white">
                 &nbsp;
@@ -624,14 +704,14 @@
                         <p class="text-small-sp-min no-v-pad-mar"><i>(MM/DD/YYYY)</i></p>
                     </div>
                     <div class="col-8 d-flex align-items-center">
-                        <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                        <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                        <span class="half-border-r bg-white px-1"> X </span><span class="half-border-r-only bg-white px-1"> X </span>
-                        <span class="half-border-r-only bg-white px-1"> X </span><span class="no-l-border bg-white px-1"> X </span>    
-                                
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-l-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+
                     </div>
                 </div>
-                
+
             </div>
             <div class="col-4">
                 <div class="row">
@@ -640,11 +720,11 @@
                         <p class="text-small-sp-min no-v-pad-mar"><i>(MM/DD/YYYY)</i></p>
                     </div>
                     <div class="col-8 d-flex align-items-center">
-                        <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                        <span class="half-border-r bg-white px-1"> X </span><span class="no-lr-border bg-white px-1"> X </span>
-                        <span class="half-border-r bg-white px-1"> X </span><span class="half-border-r-only bg-white px-1"> X </span>
-                        <span class="half-border-r-only bg-white px-1"> X </span><span class="no-l-border bg-white px-1"> X </span>    
-                                
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-l-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+
                     </div>
                 </div>
             </div>
@@ -670,8 +750,8 @@
         <!--NEW ROW-->
         <div class="row border border-1 border-top-0 border-secondary bg-lgrey">
             <div class="col-2">
-                <p class=" py-0 my-0 text-small-sp-min">Tax-Agent Accreditation No./ </p> 
-                <p class=" py-0 my-0 text-small-sp-min">Attorney's Roll No. (if applicable)</p>    
+                <p class=" py-0 my-0 text-small-sp-min">Tax-Agent Accreditation No./ </p>
+                <p class=" py-0 my-0 text-small-sp-min">Attorney's Roll No. (if applicable)</p>
             </div>
             <div class="col-2 full-border bg-white">
                 &nbsp;
@@ -683,14 +763,14 @@
                         <p class="text-small-sp-min no-v-pad-mar"><i>(MM/DD/YYYY)</i></p>
                     </div>
                     <div class="col-8 d-flex align-items-center">
-                        <span class="half-border-r bg-white p-1"> X </span><span class="no-lr-border bg-white p-1"> X </span>
-                        <span class="half-border-r bg-white p-1"> X </span><span class="no-lr-border bg-white p-1"> X </span>
-                        <span class="half-border-r bg-white p-1"> X </span><span class="half-border-r-only bg-white p-1"> X </span>
-                        <span class="half-border-r-only bg-white p-1"> X </span><span class="no-l-border bg-white p-1"> X </span>    
-                                
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-l-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+
                     </div>
                 </div>
-                
+
             </div>
             <div class="col-4">
                 <div class="row">
@@ -699,11 +779,11 @@
                         <p class="text-small-sp-min no-v-pad-mar"><i>(MM/DD/YYYY)</i></p>
                     </div>
                     <div class="col-8 d-flex align-items-center">
-                        <span class="half-border-r bg-white p-1"> X </span><span class="no-lr-border bg-white p-1"> X </span>
-                        <span class="half-border-r bg-white p-1"> X </span><span class="no-lr-border bg-white p-1"> X </span>
-                        <span class="half-border-r bg-white p-1"> X </span><span class="half-border-r-only bg-white p-1"> X </span>
-                        <span class="half-border-r-only bg-white p-1"> X </span><span class="no-l-border bg-white p-1"> X </span>    
-                                
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-lr-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+                        <span class="half-border-r-only bg-white p-1"> &nbsp;&nbsp;&nbsp; </span><span class="no-l-border bg-white p-1"> &nbsp;&nbsp;&nbsp; </span>
+
                     </div>
                 </div>
             </div>
@@ -715,7 +795,7 @@
             *NOTE: The BIR Data Privacy is in the BIR website (www.bir.gov.ph)
         </div>
 
-        
+
     </div>
 </body>
 
